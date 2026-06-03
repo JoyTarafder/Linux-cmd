@@ -306,6 +306,7 @@
     border-collapse: collapse;
     margin: 20px 0;
     font-size: 14.5px;
+    table-layout: auto;
   }
 
   thead th {
@@ -315,16 +316,20 @@
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    padding: 12px 16px;
+    padding: 10px 12px;
     text-align: left;
     border-bottom: 2px solid #1e293b;
+    word-break: break-word;
+    overflow-wrap: anywhere;
   }
 
   tbody td {
-    padding: 12px 16px;
+    padding: 10px 12px;
     border-bottom: 1px solid #1e293b;
     color: var(--text-muted);
     vertical-align: top;
+    word-break: break-word;
+    overflow-wrap: anywhere;
   }
 
   tbody tr:hover td { background: rgba(255,255,255,0.02); }
@@ -334,7 +339,8 @@
     color: var(--accent3);
     font-size: 13.5px;
     font-weight: 600;
-    white-space: nowrap;
+    white-space: normal;
+    word-break: break-all;
   }
 
   /* Info boxes */
@@ -370,6 +376,7 @@
   /* Grid layouts */
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .grid-2 > *, .grid-3 > * { min-width: 0; }
   @media(max-width:768px) {
     .grid-2,.grid-3 { grid-template-columns: 1fr; }
   }
@@ -662,11 +669,38 @@
     font-family: 'Syne', sans-serif;
     font-weight: 800;
     font-size: 16px;
-    color: var(--accent);
     white-space: nowrap;
     display: flex;
     align-items: center;
     gap: 8px;
+    cursor: pointer;
+  }
+
+  .logo-emoji {
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+
+  .nav-logo:hover .logo-emoji {
+    animation: waddle 0.6s ease infinite alternate;
+  }
+
+  .logo-text {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--purple) 50%, var(--accent3) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% auto;
+    animation: textShine 4s linear infinite;
+  }
+
+  @keyframes waddle {
+    0% { transform: rotate(-12deg); }
+    100% { transform: rotate(12deg); }
+  }
+
+  @keyframes textShine {
+    to { background-position: 200% center; }
   }
 
   .nav-links {
@@ -1017,8 +1051,59 @@
       border-top: none;
       padding: 8px 16px;
     }
+    .nav-links {
+      display: none !important;
+    }
     .nav-search-btn kbd {
       display: none;
+    }
+    .card {
+      padding: 16px 20px;
+    }
+    .container {
+      padding: 0 12px 60px;
+    }
+    .hero {
+      padding: 80px 16px 40px;
+      min-height: 60vh;
+    }
+    .toc {
+      margin-top: 24px;
+      gap: 6px;
+    }
+    .toc a {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+    .section-header {
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+    }
+    .section-title {
+      font-size: 20px;
+    }
+    .section-icon {
+      font-size: 20px;
+    }
+    .fsh-tree {
+      padding: 16px;
+      font-size: 13px;
+    }
+    .tree-dir {
+      min-width: 70px;
+    }
+    .fsh-modal {
+      max-height: 90vh;
+      border-radius: 12px;
+    }
+    .fsh-modal-header {
+      padding: 16px 20px;
+    }
+    .fsh-modal-title {
+      font-size: 20px;
+    }
+    .fsh-modal-body {
+      padding: 16px 20px;
     }
   }
 
@@ -1029,10 +1114,12 @@
 
   strong { color: var(--text); font-weight: 600; }
 
-  /* Copy Buttons Styles */
+  /* Copy Buttons & Scrollable Code Blocks Styles */
   .code-body pre {
     display: flex;
     flex-direction: column;
+    width: max-content;
+    min-width: 100%;
   }
   .code-line {
     display: flex;
@@ -1094,6 +1181,93 @@
   }
   .comment-line {
     opacity: 0.85;
+  }
+
+  /* Table scroll container for mobile responsiveness */
+  .table-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 20px 0;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  .table-container::-webkit-scrollbar {
+    height: 6px;
+  }
+  .table-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .table-container::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 3px;
+  }
+  .table-container::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+  }
+  .table-container table {
+    margin: 0;
+    width: 100%;
+    min-width: 550px;
+  }
+
+  /* Premium Hover Card (Tooltip) */
+  .cmd-hovercard {
+    position: absolute;
+    z-index: 1100;
+    width: 320px;
+    background: rgba(13, 19, 33, 0.96);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    border-radius: 12px;
+    padding: 14px 16px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.65), 0 0 20px rgba(56, 189, 248, 0.05);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+    transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    font-family: 'Inter', sans-serif;
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .cmd-hovercard.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .cmd-hovercard-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .cmd-hovercard-title::before {
+    content: '🐧';
+    font-size: 12px;
+  }
+  .cmd-hovercard-desc {
+    margin-bottom: 10px;
+    color: var(--text-muted);
+  }
+  .cmd-hovercard-box {
+    background: #03060a;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 8px 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+  }
+  .cmd-hovercard-cmd {
+    color: var(--accent3);
+  }
+  .cmd-hovercard-cmd::before {
+    content: '$ ';
+    color: #475569;
   }
   
   /* FSH Details Modal Styles */
@@ -1286,7 +1460,7 @@
 <body>
 
 <nav class="sticky-nav">
-  <div class="nav-logo">🐧 Linux Notes</div>
+  <div class="nav-logo"><span class="logo-emoji">🐧</span><span class="logo-text">Linux Notes</span></div>
   <div class="nav-links">
     <a href="#history">History</a>
     <a href="#fsh">Filesystem</a>
@@ -2285,8 +2459,19 @@ amir    ALL=(ALL) /usr/bin/apt        <span class="comment"># Only allow apt</sp
   </div>
 </div>
 
+<!-- Interactive Command Hover Card -->
+<div class="cmd-hovercard" id="cmdHovercard"></div>
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+  // Wrap all tables in scrollable containers for mobile responsiveness
+  document.querySelectorAll("table").forEach(table => {
+    const wrapper = document.createElement("div");
+    wrapper.className = "table-container";
+    table.parentNode.insertBefore(wrapper, table);
+    wrapper.appendChild(table);
+  });
+
   const codeBodies = document.querySelectorAll(".code-body");
   codeBodies.forEach(body => {
     const pre = body.querySelector("pre");
@@ -3554,6 +3739,102 @@ document.addEventListener("DOMContentLoaded", () => {
         openCmdDetailsModal(cmd);
       }
     });
+  });
+
+  // --- Interactive Hover Card Logic ---
+  const hovercard = document.getElementById("cmdHovercard");
+  let hoverTimeout = null;
+
+  // Check if touch device or small screen to prevent annoying hovercards on mobile
+  const isTouchOrMobile = () => {
+    return window.matchMedia("(max-width: 768px)").matches || 
+           ('ontouchstart' in window) || 
+           (navigator.maxTouchPoints > 0);
+  };
+
+  function showHovercard(e, titleText, descText, cmdExample) {
+    if (isTouchOrMobile()) return;
+
+    clearTimeout(hoverTimeout);
+    
+    hoverTimeout = setTimeout(() => {
+      const target = e.currentTarget;
+      
+      // Populate content
+      let cardHTML = `
+        <div class="cmd-hovercard-title">${titleText}</div>
+        <div class="cmd-hovercard-desc">${descText}</div>
+      `;
+      
+      if (cmdExample) {
+        cardHTML += `
+          <div class="cmd-hovercard-box">
+            <div class="cmd-hovercard-cmd">${cmdExample}</div>
+          </div>
+        `;
+      }
+      
+      hovercard.innerHTML = cardHTML;
+      hovercard.classList.add("active");
+      
+      // Position calculation
+      const rect = target.getBoundingClientRect();
+      const cardWidth = hovercard.offsetWidth || 320;
+      const cardHeight = hovercard.offsetHeight || 120;
+      
+      // Center horizontally relative to target element
+      let left = rect.left + window.scrollX + (rect.width - cardWidth) / 2;
+      // Align above target
+      let top = rect.top + window.scrollY - cardHeight - 12;
+      
+      // Boundary check - horizontally
+      if (left < 10) {
+        left = 10;
+      } else if (left + cardWidth > window.innerWidth - 10) {
+        left = window.innerWidth - cardWidth - 10;
+      }
+      
+      // Boundary check - vertically (flip if hits top of screen)
+      if (rect.top - cardHeight - 12 < 10) {
+        top = rect.bottom + window.scrollY + 12; // flip to below target
+      }
+      
+      hovercard.style.left = `${left}px`;
+      hovercard.style.top = `${top}px`;
+    }, 250);
+  }
+
+  function hideHovercard() {
+    clearTimeout(hoverTimeout);
+    hovercard.classList.remove("active");
+  }
+
+  // Bind hover events to code lines
+  document.querySelectorAll(".code-line").forEach(line => {
+    line.addEventListener("mouseenter", (e) => {
+      const cmd = line.getAttribute("data-cmd");
+      if (!cmd) return;
+      
+      const details = getCommandDetails(cmd);
+      showHovercard(e, details.name, details.desc, details.example);
+    });
+    
+    line.addEventListener("mouseleave", hideHovercard);
+    line.addEventListener("click", hideHovercard);
+  });
+
+  // Bind hover events to FSH tree directories
+  document.querySelectorAll(".tree-dir").forEach(dir => {
+    dir.addEventListener("mouseenter", (e) => {
+      const dirKey = dir.getAttribute("data-fsh");
+      if (!dirKey || !fshDetailsData[dirKey]) return;
+      
+      const details = fshDetailsData[dirKey];
+      showHovercard(e, details.title, details.desc, `ls -la ${details.title}`);
+    });
+    
+    dir.addEventListener("mouseleave", hideHovercard);
+    dir.addEventListener("click", hideHovercard);
   });
 
 });
