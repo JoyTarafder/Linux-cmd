@@ -415,7 +415,7 @@
   .x-char { color: var(--accent); }
   .dash-char { color: var(--text-dim); }
 
-  /* Cron diagram */
+  /* Cron diagram - Interactive & Redesigned */
   .cron-diagram {
     background: var(--bg-code);
     border: 1px solid #1e293b;
@@ -426,11 +426,59 @@
   }
 
   .cron-format {
-    font-size: 24px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 22px;
     font-weight: 700;
-    color: var(--accent);
-    margin-bottom: 18px;
-    letter-spacing: 2px;
+    margin-bottom: 24px;
+    padding: 14px 18px;
+    background: rgba(15, 23, 42, 0.4);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    width: fit-content;
+  }
+
+  .cron-format-token {
+    font-family: 'JetBrains Mono', monospace;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 2px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid transparent;
+  }
+
+  .cron-format-token:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .cron-format-token.active-edit {
+    background: rgba(56, 189, 248, 0.1);
+    border-color: rgba(56, 189, 248, 0.25);
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.1);
+  }
+
+  .cron-copy-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    margin-left: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .cron-copy-btn:hover {
+    color: var(--accent3);
+    background: rgba(52, 211, 153, 0.08);
+    border-color: rgba(52, 211, 153, 0.15);
   }
 
   .cron-fields {
@@ -441,25 +489,71 @@
 
   .cron-field {
     text-align: center;
-    padding: 12px 6px;
+    padding: 14px 10px;
     background: #0f172a;
-    border-radius: 8px;
+    border-radius: 10px;
     border: 1px solid #1e293b;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .cron-field .symbol {
-    font-size: 18px;
+  .cron-field:hover, .cron-field.active-edit-field {
+    border-color: rgba(56, 189, 248, 0.2);
+    background: rgba(15, 23, 42, 0.8);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .cron-interactive-input {
+    width: 100%;
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    padding: 4px;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
     font-weight: 700;
-    margin-bottom: 4px;
+    outline: none;
+    margin-bottom: 8px;
+    transition: all 0.2s;
+  }
+
+  .cron-interactive-input:focus {
+    border-color: var(--accent);
+    background: rgba(15, 23, 42, 0.9);
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.15);
   }
 
   .cron-field .label {
     font-size: 11px;
     color: var(--text-dim);
-    line-height: 1.3;
+    line-height: 1.35;
   }
 
-  @media (max-width: 600px) {
+  .cron-translation {
+    margin-top: 18px;
+    padding: 10px 14px;
+    background: rgba(56, 189, 248, 0.05);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cron-translation span {
+    font-weight: 700;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 768px) {
     .cron-fields { grid-template-columns: repeat(3, 1fr); gap: 8px; }
   }
 
@@ -535,21 +629,33 @@
 
   .footer span { color: var(--accent3); }
 
-  /* Sticky nav */
+  /* Sticky nav - Redesigned Premium Glassmorphism */
   .sticky-nav {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 32px);
+    max-width: 1200px;
     z-index: 100;
-    background: rgba(7, 9, 14, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid #1e293b;
-    padding: 10px 24px;
+    background: rgba(13, 19, 33, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 8px 18px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .sticky-nav:hover {
+    border-color: rgba(56, 189, 248, 0.2);
+    background: rgba(13, 19, 33, 0.8);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.05);
   }
 
   .nav-logo {
@@ -558,6 +664,9 @@
     font-size: 16px;
     color: var(--accent);
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
   .nav-links {
@@ -566,6 +675,7 @@
     overflow-x: auto;
     flex: 1;
     scrollbar-width: none;
+    justify-content: flex-start;
   }
 
   .nav-links::-webkit-scrollbar { display: none; }
@@ -578,12 +688,338 @@
     padding: 6px 12px;
     border-radius: 6px;
     white-space: nowrap;
-    transition: all 0.2s;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid transparent;
   }
 
   .nav-links a:hover {
     color: var(--accent);
+    background: rgba(56, 189, 248, 0.06);
+    border-color: rgba(56, 189, 248, 0.1);
+  }
+
+  /* Search Trigger Button */
+  .nav-search-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 6px 12px;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    user-select: none;
+    outline: none;
+    flex-shrink: 0;
+  }
+
+  .nav-search-btn:hover {
+    border-color: var(--accent);
+    color: var(--text);
     background: rgba(56, 189, 248, 0.08);
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.12);
+  }
+
+  .nav-search-btn svg {
+    stroke: var(--text-dim);
+    transition: stroke 0.2s;
+  }
+
+  .nav-search-btn:hover svg {
+    stroke: var(--accent);
+  }
+
+  .nav-search-btn kbd {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-size: 9px;
+    font-family: inherit;
+    color: var(--text-muted);
+    margin-left: 4px;
+  }
+
+  /* Search Modal Styles */
+  .search-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(7, 9, 14, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 12vh 20px 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .search-modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .search-modal {
+    background: #0d1321;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    width: 100%;
+    max-width: 600px;
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    transform: translateY(-20px) scale(0.98);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .search-modal-overlay.active .search-modal {
+    transform: translateY(0) scale(1);
+  }
+
+  .search-header-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(15, 23, 42, 0.4);
+  }
+
+  .search-icon-wrapper {
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+  }
+
+  .search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 15px;
+  }
+
+  .search-input::placeholder {
+    color: var(--text-dim);
+  }
+
+  .search-close-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s;
+  }
+
+  .search-close-btn:hover {
+    color: var(--text);
+    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .search-results {
+    max-height: 380px;
+    overflow-y: auto;
+    padding: 12px;
+  }
+
+  /* Custom scrollbar for search results */
+  .search-results::-webkit-scrollbar { width: 6px; }
+  .search-results::-webkit-scrollbar-track { background: transparent; }
+  .search-results::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+  .search-results::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  .search-result-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid transparent;
+    margin-bottom: 6px;
+  }
+
+  .search-result-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .search-result-item:hover, .search-result-item.selected {
+    background: rgba(56, 189, 248, 0.05);
+    border-color: rgba(56, 189, 248, 0.15);
+  }
+
+  .search-result-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .search-result-command-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+
+  .search-result-command {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .search-result-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .search-result-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .search-result-section {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    background: rgba(167, 139, 250, 0.08);
+    border: 1px solid rgba(167, 139, 250, 0.2);
+    color: var(--purple);
+    padding: 2px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .search-result-copy-btn {
+    background: rgba(30, 41, 59, 0.85);
+    border: 1px solid #334155;
+    color: var(--text-dim);
+    border-radius: 6px;
+    padding: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .search-result-item:hover .search-result-copy-btn,
+  .search-result-item.selected .search-result-copy-btn {
+    border-color: rgba(255,255,255,0.15);
+  }
+
+  .search-result-copy-btn:hover {
+    color: var(--accent3);
+    border-color: var(--accent3);
+    background: rgba(52, 211, 153, 0.1);
+  }
+
+  .search-empty-state {
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--text-dim);
+  }
+
+  .search-empty-state svg {
+    margin-bottom: 12px;
+    stroke: #334155;
+  }
+
+  .search-empty-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .search-empty-sub {
+    font-size: 12px;
+  }
+
+  .search-highlight {
+    background: rgba(251, 191, 36, 0.25);
+    color: #fbbf24;
+    border-radius: 2px;
+    padding: 0 2px;
+    font-weight: 600;
+  }
+
+  .search-footer {
+    padding: 10px 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(15, 23, 42, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .search-footer-kbd-list {
+    display: flex;
+    gap: 12px;
+  }
+
+  .search-footer kbd {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    padding: 1px 4px;
+    color: var(--text-muted);
+  }
+
+  /* Flash Highlight Animation */
+  @keyframes lineFlash {
+    0% {
+      background-color: rgba(56, 189, 248, 0.35);
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+    }
+    100% {
+      background-color: transparent;
+      box-shadow: none;
+    }
+  }
+
+  .flash-highlight {
+    animation: lineFlash 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @media (max-width: 768px) {
+    .sticky-nav {
+      top: 0;
+      width: 100%;
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+      border-top: none;
+      padding: 8px 16px;
+    }
+    .nav-search-btn kbd {
+      display: none;
+    }
   }
 
   p { margin-bottom: 12px; color: var(--text-muted); }
@@ -605,11 +1041,16 @@
     position: relative;
     padding: 3px 6px;
     border-radius: 6px;
-    transition: background-color 0.15s ease;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     min-height: 28px;
+    cursor: pointer;
   }
   .code-line:hover {
-    background-color: rgba(255, 255, 255, 0.035);
+    background-color: rgba(255, 255, 255, 0.045);
+  }
+  .code-line:hover .cmd {
+    color: var(--accent3) !important;
+    text-shadow: 0 0 8px rgba(52, 211, 153, 0.3);
   }
   .line-content {
     font-family: inherit;
@@ -655,7 +1096,191 @@
     opacity: 0.85;
   }
   
-  main { padding-top: 52px; }
+  /* FSH Details Modal Styles */
+  .fsh-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(7, 9, 14, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .fsh-modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .fsh-modal {
+    background: #0d1321;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    width: 100%;
+    max-width: 650px;
+    border-radius: 16px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    transform: translateY(20px) scale(0.97);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    max-height: 85vh;
+  }
+
+  .fsh-modal-overlay.active .fsh-modal {
+    transform: translateY(0) scale(1);
+  }
+
+  .fsh-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(15, 23, 42, 0.4);
+  }
+
+  .fsh-modal-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: -0.5px;
+  }
+
+  .fsh-modal-subtitle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  .fsh-modal-close {
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+
+  .fsh-modal-close:hover {
+    color: var(--accent5);
+  }
+
+  .fsh-modal-body {
+    padding: 24px;
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  .fsh-modal-body::-webkit-scrollbar { width: 6px; }
+  .fsh-modal-body::-webkit-scrollbar-track { background: transparent; }
+  .fsh-modal-body::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+  .fsh-modal-body::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  .fsh-modal-desc {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+
+  .fsh-modal-section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .fsh-modal-section-title::before {
+    content: '';
+    width: 4px;
+    height: 14px;
+    background: var(--accent3);
+    border-radius: 2px;
+  }
+
+  .fsh-command-item {
+    background: var(--bg-code);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .fsh-command-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .fsh-command-name {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--accent3);
+    margin-bottom: 4px;
+  }
+
+  .fsh-command-explain {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+  }
+
+  .fsh-command-box {
+    background: #03060a;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    padding: 12px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    overflow-x: auto;
+  }
+
+  .fsh-cmd-line {
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  .fsh-cmd-line::before {
+    content: '$ ';
+    color: #475569;
+  }
+
+  .fsh-output-line {
+    color: var(--text-dim);
+    white-space: pre-wrap;
+  }
+
+  /* Make tree-dir clickable */
+  .tree-dir {
+    cursor: pointer;
+    border-bottom: 1px dashed rgba(56, 189, 248, 0.5);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .tree-dir:hover {
+    color: var(--accent) !important;
+    background: rgba(56, 189, 248, 0.08);
+    border-bottom-color: var(--accent);
+    padding-left: 6px;
+    padding-right: 6px;
+    margin-left: -6px;
+    margin-right: -6px;
+    border-radius: 4px;
+  }
+  
+  main { padding-top: 80px; }
 </style>
 </head>
 <body>
@@ -679,6 +1304,11 @@
     <a href="#sudo">Sudo</a>
     <a href="#network">Networking</a>
   </div>
+  <button class="nav-search-btn" id="navSearchTrigger" title="Search commands (Ctrl+K)">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    <span>Search...</span>
+    <kbd>Ctrl+K</kbd>
+  </button>
 </nav>
 
 <main>
@@ -772,21 +1402,21 @@
   <div class="card">
     <div class="fsh-tree">
       <div class="tree-root">/ (root)</div>
-      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir">/root</span><span class="tree-desc">Superuser's home directory. Only root can access this.</span></div>
-      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir">/home</span><span class="tree-desc">Home directories for all non-root users (e.g., /home/joy)</span></div>
-      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir">/bin</span><span class="tree-desc">Essential user binaries: ls, cd, cp, mv, rm, cat, grep, etc.</span></div>
-      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir">/sbin</span><span class="tree-desc">System binaries for admin: iptables, reboot, fdisk, ifconfig, swapon</span></div>
-      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir">/etc</span><span class="tree-desc">All configuration files: /etc/passwd, /etc/shadow, /etc/fstab, /etc/hosts</span></div>
-      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir">/dev</span><span class="tree-desc">Device files: /dev/sda (hard disk), /dev/tty1 (terminal), /dev/null</span></div>
-      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir">/var</span><span class="tree-desc">Variable data: /var/log (logs), /var/mail, /var/tmp, /var/lib</span></div>
-      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir">/tmp</span><span class="tree-desc">Temporary files — cleared on every reboot. World-writable.</span></div>
-      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir">/usr</span><span class="tree-desc">User-installed software &amp; libraries: /usr/bin, /usr/lib, /usr/local</span></div>
-      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir">/opt</span><span class="tree-desc">Optional third-party software (e.g., Docker, custom tools)</span></div>
-      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir">/boot</span><span class="tree-desc">Boot loader files: GRUB, Linux kernel images (vmlinuz)</span></div>
-      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir">/mnt</span><span class="tree-desc">Temporary mount point for file systems (manual mounts)</span></div>
-      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir">/media</span><span class="tree-desc">Auto-mounted removable media: USB drives, CD-ROMs</span></div>
-      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir">/proc</span><span class="tree-desc">Virtual FS — kernel &amp; process info: /proc/cpuinfo, /proc/meminfo</span></div>
-      <div class="tree-item"><span class="tree-branch">└──</span><span class="tree-dir">/sys</span><span class="tree-desc">Virtual FS — hardware/kernel interface (sysfs)</span></div>
+      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir" data-fsh="/root" title="Click to view details & examples">/root</span><span class="tree-desc">Superuser's home directory. Only root can access this.</span></div>
+      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir" data-fsh="/home" title="Click to view details & examples">/home</span><span class="tree-desc">Home directories for all non-root users (e.g., /home/joy)</span></div>
+      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir" data-fsh="/bin" title="Click to view details & examples">/bin</span><span class="tree-desc">Essential user binaries: ls, cd, cp, mv, rm, cat, grep, etc.</span></div>
+      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir" data-fsh="/sbin" title="Click to view details & examples">/sbin</span><span class="tree-desc">System binaries for admin: iptables, reboot, fdisk, ifconfig, swapon</span></div>
+      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir" data-fsh="/etc" title="Click to view details & examples">/etc</span><span class="tree-desc">All configuration files: /etc/passwd, /etc/shadow, /etc/fstab, /etc/hosts</span></div>
+      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir" data-fsh="/dev" title="Click to view details & examples">/dev</span><span class="tree-desc">Device files: /dev/sda (hard disk), /dev/tty1 (terminal), /dev/null</span></div>
+      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir" data-fsh="/var" title="Click to view details & examples">/var</span><span class="tree-desc">Variable data: /var/log (logs), /var/mail, /var/tmp, /var/lib</span></div>
+      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir" data-fsh="/tmp" title="Click to view details & examples">/tmp</span><span class="tree-desc">Temporary files — cleared on every reboot. World-writable.</span></div>
+      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir" data-fsh="/usr" title="Click to view details & examples">/usr</span><span class="tree-desc">User-installed software &amp; libraries: /usr/bin, /usr/lib, /usr/local</span></div>
+      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir" data-fsh="/opt" title="Click to view details & examples">/opt</span><span class="tree-desc">Optional third-party software (e.g., Docker, custom tools)</span></div>
+      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir" data-fsh="/boot" title="Click to view details & examples">/boot</span><span class="tree-desc">Boot loader files: GRUB, Linux kernel images (vmlinuz)</span></div>
+      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir" data-fsh="/mnt" title="Click to view details & examples">/mnt</span><span class="tree-desc">Temporary mount point for file systems (manual mounts)</span></div>
+      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir" data-fsh="/media" title="Click to view details & examples">/media</span><span class="tree-desc">Auto-mounted removable media: USB drives, CD-ROMs</span></div>
+      <div class="tree-item"><span class="tree-branch">├──</span><span class="tree-dir" data-fsh="/proc" title="Click to view details & examples">/proc</span><span class="tree-desc">Virtual FS — kernel &amp; process info: /proc/cpuinfo, /proc/meminfo</span></div>
+      <div class="tree-item"><span class="tree-branch">└──</span><span class="tree-dir" data-fsh="/sys" title="Click to view details & examples">/sys</span><span class="tree-desc">Virtual FS — hardware/kernel interface (sysfs)</span></div>
     </div>
   </div>
 </section>
@@ -1388,14 +2018,45 @@ tar <span class="flag">-xvJf</span> /mnt/backup.tar.xz       <span class="commen
   <div class="card">
     <div class="card-title">Crontab Format</div>
     <div class="cron-diagram">
-      <div class="cron-format">* &nbsp; * &nbsp; * &nbsp; * &nbsp; * &nbsp; /path/to/script.sh</div>
+      <div class="cron-format">
+        <span class="cron-format-token" data-token-part="minute" style="color:var(--accent)">*</span>
+        <span class="cron-format-token" data-token-part="hour" style="color:var(--accent3)">*</span>
+        <span class="cron-format-token" data-token-part="dom" style="color:var(--accent4)">*</span>
+        <span class="cron-format-token" data-token-part="month" style="color:var(--pink)">*</span>
+        <span class="cron-format-token" data-token-part="dow" style="color:var(--purple)">*</span>
+        <span class="cron-format-token" data-token-part="cmd" style="color:var(--text)">/path/to/script.sh</span>
+        <button class="cron-copy-btn" id="cronCopyBtn" title="Copy cron expression">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+        </button>
+      </div>
       <div class="cron-fields">
-        <div class="cron-field"><div class="symbol" style="color:var(--accent)">*</div><div class="label">Minute<br>0–59</div></div>
-        <div class="cron-field"><div class="symbol" style="color:var(--accent3)">*</div><div class="label">Hour<br>0–23</div></div>
-        <div class="cron-field"><div class="symbol" style="color:var(--accent4)">*</div><div class="label">Day of Month<br>1–31</div></div>
-        <div class="cron-field"><div class="symbol" style="color:var(--pink)">*</div><div class="label">Month<br>1–12</div></div>
-        <div class="cron-field"><div class="symbol" style="color:var(--purple)">*</div><div class="label">Day of Week<br>0–7 (0,7=Sun)</div></div>
-        <div class="cron-field"><div class="symbol" style="color:var(--text2)" style="font-size:14px">/cmd</div><div class="label">Command<br>or Script</div></div>
+        <div class="cron-field" data-field-part="minute">
+          <input type="text" class="cron-interactive-input" value="*" data-cron-part="minute" style="color:var(--accent)">
+          <div class="label">Minute<br>0–59</div>
+        </div>
+        <div class="cron-field" data-field-part="hour">
+          <input type="text" class="cron-interactive-input" value="*" data-cron-part="hour" style="color:var(--accent3)">
+          <div class="label">Hour<br>0–23</div>
+        </div>
+        <div class="cron-field" data-field-part="dom">
+          <input type="text" class="cron-interactive-input" value="*" data-cron-part="dom" style="color:var(--accent4)">
+          <div class="label">Day of Month<br>1–31</div>
+        </div>
+        <div class="cron-field" data-field-part="month">
+          <input type="text" class="cron-interactive-input" value="*" data-cron-part="month" style="color:var(--pink)">
+          <div class="label">Month<br>1–12</div>
+        </div>
+        <div class="cron-field" data-field-part="dow">
+          <input type="text" class="cron-interactive-input" value="*" data-cron-part="dow" style="color:var(--purple)">
+          <div class="label">Day of Week<br>0–7 (0,7=Sun)</div>
+        </div>
+        <div class="cron-field" data-field-part="cmd">
+          <input type="text" class="cron-interactive-input" value="/path/to/script.sh" data-cron-part="cmd" style="color:var(--text2); font-size:12px;">
+          <div class="label">Command<br>or Script</div>
+        </div>
+      </div>
+      <div class="cron-translation" id="cronTranslation">
+        <span>Description:</span> Runs every minute, every day.
       </div>
     </div>
 
@@ -1578,7 +2239,51 @@ amir    ALL=(ALL) /usr/bin/apt        <span class="comment"># Only allow apt</sp
   <div>🐧 Linux Short Notes &nbsp;|&nbsp; <span>Train With Shubham</span> &nbsp;|&nbsp; For DevOps Engineers</div>
   <div style="margin-top:8px;color:var(--text3)">Formatted &amp; Extended by <strong>Joy Tarafder</strong> &nbsp;·&nbsp; Complete DevOps Reference</div>
 </footer>
+<!-- Search Modal -->
+<div class="search-modal-overlay" id="searchModalOverlay">
+  <div class="search-modal">
+    <div class="search-header-container">
+      <div class="search-icon-wrapper">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </div>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search commands, flags or topics..." autocomplete="off">
+      <button class="search-close-btn" id="searchCloseBtn">ESC</button>
+    </div>
+    
+    <div class="search-results" id="searchResults">
+      <!-- Search results will be dynamically inserted here -->
+    </div>
+    
+    <div class="search-footer">
+      <div class="search-footer-kbd-list">
+        <span><kbd>↑↓</kbd> Navigate</span>
+        <span><kbd>Enter</kbd> Select</span>
+        <span><kbd>Esc</kbd> Close</span>
+      </div>
+      <div id="searchStats">0 commands found</div>
+    </div>
+  </div>
+</div>
 
+<!-- FSH Details Modal -->
+<div class="fsh-modal-overlay" id="fshModalOverlay">
+  <div class="fsh-modal">
+    <div class="fsh-modal-header">
+      <div>
+        <div class="fsh-modal-title" id="fshModalTitle">/bin</div>
+        <div class="fsh-modal-subtitle" id="fshModalSubtitle">Essential User Binaries</div>
+      </div>
+      <button class="fsh-modal-close" id="fshModalCloseBtn">&times;</button>
+    </div>
+    <div class="fsh-modal-body">
+      <p class="fsh-modal-desc" id="fshModalDesc"></p>
+      <div class="fsh-modal-section-title">Common Commands & Configurations</div>
+      <div id="fshModalCommands">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -1616,7 +2321,7 @@ document.addEventListener("DOMContentLoaded", () => {
       
       const escapedCmd = cmdToCopy.replace(/"/g, "&quot;").replace(/'/g, "&#39;");
       
-      return `<div class="code-line" data-cmd="${escapedCmd}">` +
+      return `<div class="code-line" data-cmd="${escapedCmd}" title="Click to view details & execution example">` +
              `<span class="line-content">${line}</span>` +
              `<button class="copy-line-btn" title="Copy command">` +
              `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>` +
@@ -1651,9 +2356,1208 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Failed to copy text: ", err);
     });
   });
+
+  // --- Command Search Indexing & Logic ---
+  const searchIndex = [];
+  const overlay = document.getElementById("searchModalOverlay");
+  const searchInput = document.getElementById("searchInput");
+  const searchResults = document.getElementById("searchResults");
+  const searchTrigger = document.getElementById("navSearchTrigger");
+  const closeBtn = document.getElementById("searchCloseBtn");
+  
+  let selectedIndex = -1;
+  let currentFilteredResults = [];
+
+  // Wait briefly for the code-line DOM elements to be constructed by the above code
+  setTimeout(() => {
+    // 1. Gather commands from code lines
+    const codeLines = document.querySelectorAll(".code-line");
+    codeLines.forEach((line, idx) => {
+      const cmd = line.getAttribute("data-cmd");
+      if (!cmd) return;
+      
+      const lineId = `code-line-${idx}`;
+      line.id = lineId;
+      
+      const commentSpan = line.querySelector(".comment");
+      const desc = commentSpan ? commentSpan.textContent.replace(/^#\s*/, "").trim() : "";
+      
+      const parentSection = line.closest(".section");
+      const sectionName = parentSection ? parentSection.querySelector(".section-title").textContent.trim() : "Linux Guide";
+      
+      searchIndex.push({
+        type: "command",
+        elementId: lineId,
+        command: cmd,
+        description: desc,
+        sectionName: sectionName
+      });
+    });
+    
+    // 2. Also index card/topic titles
+    const cards = document.querySelectorAll(".card");
+    cards.forEach((card, idx) => {
+      const cardTitle = card.querySelector(".card-title");
+      if (!cardTitle) return;
+      
+      const cardTitleText = cardTitle.textContent.trim();
+      const parentSection = card.closest(".section");
+      const sectionName = parentSection ? parentSection.querySelector(".section-title").textContent.trim() : "Linux Guide";
+      
+      const cardId = `card-${idx}`;
+      card.id = cardId;
+      
+      const pText = card.querySelector("p") ? card.querySelector("p").textContent.trim() : "";
+      
+      searchIndex.push({
+        type: "topic",
+        elementId: cardId,
+        command: cardTitleText,
+        description: pText,
+        sectionName: sectionName
+      });
+    });
+    
+    if (document.getElementById("searchStats")) {
+      document.getElementById("searchStats").textContent = `${searchIndex.length} items indexed`;
+    }
+  }, 200);
+
+  function openSearchModal() {
+    overlay.classList.add("active");
+    setTimeout(() => searchInput.focus(), 50);
+    selectedIndex = -1;
+    performSearch();
+  }
+
+  function closeSearchModal() {
+    overlay.classList.remove("active");
+    searchInput.value = "";
+    currentFilteredResults = [];
+    selectedIndex = -1;
+  }
+
+  searchTrigger.addEventListener("click", openSearchModal);
+  closeBtn.addEventListener("click", closeSearchModal);
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) closeSearchModal();
+  });
+
+  // Hotkey: Ctrl+K or Cmd+K to open/close search, Esc to close
+  window.addEventListener("keydown", (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+      e.preventDefault();
+      if (overlay.classList.contains("active")) {
+        closeSearchModal();
+      } else {
+        openSearchModal();
+      }
+    } else if (e.key === "Escape" && overlay.classList.contains("active")) {
+      closeSearchModal();
+    }
+  });
+
+  function escapeRegex(string) {
+    return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+  }
+
+  function highlightText(text, query) {
+    if (!query) return text;
+    const escapedQuery = escapeRegex(query);
+    const regex = new RegExp(`(${escapedQuery})`, "gi");
+    return text.replace(regex, `<span class="search-highlight">$1</span>`);
+  }
+
+  function performSearch() {
+    const query = searchInput.value.trim().toLowerCase();
+    
+    if (query === "") {
+      // Show top 8 items initially as suggestions
+      currentFilteredResults = searchIndex.slice(0, 8);
+    } else {
+      currentFilteredResults = searchIndex.filter(item => {
+        return item.command.toLowerCase().includes(query) || 
+               item.description.toLowerCase().includes(query) ||
+               item.sectionName.toLowerCase().includes(query);
+      });
+    }
+    
+    renderResults(query);
+  }
+
+  function renderResults(query) {
+    searchResults.innerHTML = "";
+    
+    if (currentFilteredResults.length === 0) {
+      searchResults.innerHTML = `
+        <div class="search-empty-state">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <div class="search-empty-title">No results found</div>
+          <div class="search-empty-sub">We couldn't find anything matching "${query}"</div>
+        </div>
+      `;
+      if (document.getElementById("searchStats")) {
+        document.getElementById("searchStats").textContent = "0 matches";
+      }
+      return;
+    }
+    
+    currentFilteredResults.forEach((item, index) => {
+      const itemEl = document.createElement("div");
+      itemEl.className = "search-result-item";
+      if (index === selectedIndex) {
+        itemEl.classList.add("selected");
+      }
+      itemEl.setAttribute("data-index", index);
+      
+      const typeBadge = item.type === "command" 
+        ? `<span class="tag purple" style="margin: 0; font-size: 10px;">Cmd</span>`
+        : `<span class="tag green" style="margin: 0; font-size: 10px;">Topic</span>`;
+
+      const highlightedCommand = highlightText(item.command, query);
+      const highlightedDesc = highlightText(item.description, query);
+      
+      itemEl.innerHTML = `
+        <div class="search-result-content">
+          <div class="search-result-command-wrapper">
+            ${typeBadge}
+            <span class="search-result-command">${highlightedCommand}</span>
+          </div>
+          <div class="search-result-desc">${highlightedDesc}</div>
+        </div>
+        <div class="search-result-meta">
+          <span class="search-result-section">${item.sectionName}</span>
+          ${item.type === "command" ? `
+            <button class="search-result-copy-btn" title="Copy command" data-cmd="${item.command.replace(/"/g, "&quot;")}">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            </button>
+          ` : ""}
+        </div>
+      `;
+      
+      // Click handlers
+      itemEl.addEventListener("click", (e) => {
+        const copyBtn = e.target.closest(".search-result-copy-btn");
+        if (copyBtn) {
+          e.stopPropagation();
+          const cmd = copyBtn.getAttribute("data-cmd");
+          navigator.clipboard.writeText(cmd).then(() => {
+            const originalHTML = copyBtn.innerHTML;
+            copyBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+            setTimeout(() => {
+              copyBtn.innerHTML = originalHTML;
+            }, 1500);
+          });
+        } else {
+          navigateToItem(item);
+        }
+      });
+      
+      searchResults.appendChild(itemEl);
+    });
+    
+    if (document.getElementById("searchStats")) {
+      document.getElementById("searchStats").textContent = `${currentFilteredResults.length} matches`;
+    }
+  }
+
+  function navigateToItem(item) {
+    closeSearchModal();
+    
+    const targetElement = document.getElementById(item.elementId);
+    if (!targetElement) return;
+    
+    // Smooth scroll into view
+    targetElement.scrollIntoView({ behavior: "smooth", block: "center" });
+    
+    // Remove previous highlights
+    document.querySelectorAll(".flash-highlight").forEach(el => {
+      el.classList.remove("flash-highlight");
+    });
+    
+    // Trigger flash animation
+    setTimeout(() => {
+      targetElement.classList.add("flash-highlight");
+      setTimeout(() => {
+        targetElement.classList.remove("flash-highlight");
+      }, 1600);
+    }, 300);
+  }
+
+  searchInput.addEventListener("input", () => {
+    selectedIndex = -1;
+    performSearch();
+  });
+
+  searchInput.addEventListener("keydown", (e) => {
+    if (currentFilteredResults.length === 0) return;
+    
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      selectedIndex = (selectedIndex + 1) % currentFilteredResults.length;
+      updateSelection();
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      selectedIndex = (selectedIndex - 1 + currentFilteredResults.length) % currentFilteredResults.length;
+      updateSelection();
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      if (selectedIndex >= 0 && selectedIndex < currentFilteredResults.length) {
+        navigateToItem(currentFilteredResults[selectedIndex]);
+      } else if (currentFilteredResults.length > 0) {
+        navigateToItem(currentFilteredResults[0]);
+      }
+    }
+  });
+
+  function updateSelection() {
+    const items = searchResults.querySelectorAll(".search-result-item");
+    items.forEach((item, index) => {
+      if (index === selectedIndex) {
+        item.classList.add("selected");
+        item.scrollIntoView({ block: "nearest" });
+      } else {
+        item.classList.remove("selected");
+      }
+    });
+  }
+
+  // --- Interactive Cron Editor Logic ---
+  const cronInputs = document.querySelectorAll(".cron-interactive-input");
+  const cronTokens = document.querySelectorAll(".cron-format-token");
+  const cronTranslation = document.getElementById("cronTranslation");
+  const cronCopyBtn = document.getElementById("cronCopyBtn");
+
+  function getCronTranslation(minute, hour, dom, month, dow) {
+    let freqStr = "";
+    let dayStr = "";
+    
+    // Minute & Hour Translation
+    if (minute === "*" && hour === "*") {
+      freqStr = "every minute";
+    } else if (minute.startsWith("*/") && hour === "*") {
+      const m = minute.split("/")[1];
+      freqStr = `every ${m} minutes`;
+    } else if (minute !== "*" && hour === "*") {
+      freqStr = `at minute ${minute} of every hour`;
+    } else if (minute === "*" && hour !== "*") {
+      freqStr = `every minute of hour ${hour}`;
+    } else {
+      if (!isNaN(minute) && !isNaN(hour)) {
+        const pad = (val) => val.toString().padStart(2, '0');
+        freqStr = `at ${pad(hour)}:${pad(minute)}`;
+      } else {
+        freqStr = `at minute ${minute} of hour ${hour}`;
+      }
+    }
+
+    // Day of Month & Month Translation
+    if (dom === "*" && month === "*") {
+      dayStr = "every day";
+    } else if (dom !== "*" && month === "*") {
+      dayStr = `on day ${dom} of the month`;
+    } else if (dom === "*" && month !== "*") {
+      dayStr = `every day in month ${month}`;
+    } else {
+      dayStr = `on day ${dom} of month ${month}`;
+    }
+
+    // Day of Week
+    let dowStr = "";
+    if (dow !== "*") {
+      const dows = {
+        "0": "Sunday", "7": "Sunday",
+        "1": "Monday", "2": "Tuesday", "3": "Wednesday",
+        "4": "Thursday", "5": "Friday", "6": "Saturday"
+      };
+      if (dows[dow]) {
+        dowStr = `on ${dows[dow]}`;
+      } else {
+        dowStr = `on day ${dow} of the week`;
+      }
+    }
+
+    let parts = ["Runs", freqStr];
+    if (dowStr) {
+      parts.push(dowStr);
+    } else {
+      parts.push(dayStr);
+    }
+    
+    return parts.join(" ") + ".";
+  }
+
+  function updateCronDiagram() {
+    const parts = {};
+    cronInputs.forEach(input => {
+      const part = input.getAttribute("data-cron-part");
+      parts[part] = input.value.trim() || "*";
+      
+      // Update top token
+      const token = document.querySelector(`.cron-format-token[data-token-part="${part}"]`);
+      if (token) {
+        token.textContent = parts[part];
+      }
+    });
+
+    // Update translation text
+    if (cronTranslation) {
+      const translationText = getCronTranslation(
+        parts["minute"],
+        parts["hour"],
+        parts["dom"],
+        parts["month"],
+        parts["dow"]
+      );
+      cronTranslation.innerHTML = `<span>Description:</span> ${translationText}`;
+    }
+  }
+
+  // Bind input listeners
+  cronInputs.forEach(input => {
+    input.addEventListener("input", updateCronDiagram);
+    
+    // Highlight effect when focus
+    input.addEventListener("focus", () => {
+      const part = input.getAttribute("data-cron-part");
+      
+      // Highlight matching token
+      cronTokens.forEach(t => t.classList.remove("active-edit"));
+      const token = document.querySelector(`.cron-format-token[data-token-part="${part}"]`);
+      if (token) token.classList.add("active-edit");
+      
+      // Highlight matching card field
+      document.querySelectorAll(".cron-field").forEach(f => f.classList.remove("active-edit-field"));
+      const fieldCard = input.closest(".cron-field");
+      if (fieldCard) fieldCard.classList.add("active-edit-field");
+    });
+
+    input.addEventListener("blur", () => {
+      const part = input.getAttribute("data-cron-part");
+      const token = document.querySelector(`.cron-format-token[data-token-part="${part}"]`);
+      if (token) token.classList.remove("active-edit");
+      
+      const fieldCard = input.closest(".cron-field");
+      if (fieldCard) fieldCard.classList.remove("active-edit-field");
+    });
+  });
+
+  // Token click focuses input
+  cronTokens.forEach(token => {
+    token.addEventListener("click", () => {
+      const part = token.getAttribute("data-token-part");
+      const input = document.querySelector(`.cron-interactive-input[data-cron-part="${part}"]`);
+      if (input) {
+        input.focus();
+        input.select();
+      }
+    });
+  });
+
+  // Copy whole expression
+  if (cronCopyBtn) {
+    cronCopyBtn.addEventListener("click", () => {
+      const exprParts = [];
+      cronInputs.forEach(input => {
+        exprParts.push(input.value.trim() || "*");
+      });
+      const cronExpr = exprParts.join(" ");
+      
+      navigator.clipboard.writeText(cronExpr).then(() => {
+        const origHTML = cronCopyBtn.innerHTML;
+        cronCopyBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+        cronCopyBtn.style.borderColor = "var(--accent3)";
+        setTimeout(() => {
+          cronCopyBtn.innerHTML = origHTML;
+          cronCopyBtn.style.borderColor = "";
+        }, 1500);
+      });
+    });
+  }
+
+  // Initial update
+  updateCronDiagram();
+
+  // --- FSH Directory Details Modal Logic ---
+  const fshDetailsData = {
+    "/root": {
+      title: "/root",
+      subtitle: "Superuser's Home Directory",
+      desc: "The home directory for the root user (the system administrator). Unlike normal user accounts whose home folders reside in /home, the superuser has a dedicated directory at /root. Standard users cannot read or write in this directory by default, ensuring administrative privacy and security.",
+      commands: [
+        {
+          name: "Attempting access as normal user",
+          explain: "Trying to open or list /root as a standard user results in a permission failure.",
+          example: "cd /root",
+          output: "-bash: cd: /root: Permission denied"
+        },
+        {
+          name: "Accessing using sudo authority",
+          explain: "Administrators use sudo to gain elevated privilege and examine /root contents.",
+          example: "sudo ls -la /root",
+          output: "total 28\ndrwx------.  4 root root 4096 Jun  3 12:00 .\ndr-xr-xr-x. 17 root root 4096 Jun  3 11:30 ..\n-rw-------.  1 root root 1204 Jun  3 12:10 .bash_history\n-rw-r--r--.  1 root root   18 Dec 28  2023 .bash_logout\n-rw-r--r--.  1 root root  141 Dec 28  2023 .bash_profile\n-rw-r--r--.  1 root root  429 Dec 28  2023 .bashrc"
+        }
+      ]
+    },
+    "/home": {
+      title: "/home",
+      subtitle: "User Home Directories",
+      desc: "Contains home directories for regular (non-root) users. When a regular user logs in, they land in their personal workspace under /home (e.g. /home/joy). Regular users have full control of their own folder but are restricted from accessing other users' files.",
+      commands: [
+        {
+          name: "Inspecting all user workspaces",
+          explain: "List all user home directories created on the system.",
+          example: "ls -l /home",
+          output: "total 12\ndrwx------. 5 joy  joy  4096 Jun  3 15:40 joy\ndrwx------. 5 shub shub 4096 Jun  3 16:10 shub\ndrwx------. 5 amir amir 4096 Jun  3 17:02 amir"
+        },
+        {
+          name: "Jumping directly to user home",
+          explain: "Use the tilde (~) expansion shortcut to navigate home from anywhere.",
+          example: "cd ~ && pwd",
+          output: "/home/joy"
+        }
+      ]
+    },
+    "/bin": {
+      title: "/bin",
+      subtitle: "Essential User Binaries",
+      desc: "Contains essential user binaries (executable programs) required for booting the system, running single-user emergency repair, and performing basic directory and file operations. Standard commands such as ls, cat, cp, grep, and mkdir live here.",
+      commands: [
+        {
+          name: "Listing basic commands",
+          explain: "See some of the basic utilities housed in /bin.",
+          example: "ls /bin | head -n 6",
+          output: "bash\ncat\nchgrp\nchmod\nchown\ncp"
+        },
+        {
+          name: "Locating command path",
+          explain: "Check the exact filesystem location of the 'ls' binary.",
+          example: "which ls",
+          output: "/usr/bin/ls"
+        }
+      ]
+    },
+    "/sbin": {
+      title: "/sbin",
+      subtitle: "System Administration Binaries",
+      desc: "Contains essential binaries used for system administration, hardware partitioning, networking, and system boot procedures. These executables are primarily reserved for execution by the root user or via sudo. Examples include iptables, fdisk, fsck, reboot, and ip.",
+      commands: [
+        {
+          name: "Checking network configuration",
+          explain: "View active network interfaces and IP addresses.",
+          example: "ip addr show ens33",
+          output: "2: ens33: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default\n    link/ether 00:0c:29:ab:12:cd brd ff:ff:ff:ff:ff:ff\n    inet 192.168.0.2/24 brd 192.168.0.255 scope global dynamic ens33\n       valid_lft 86312sec preferred_lft 86312sec"
+        },
+        {
+          name: "Viewing partition tables",
+          explain: "List all active hard disk partitions on the system.",
+          example: "sudo fdisk -l",
+          output: "Disk /dev/sda: 20 GiB, 21474836480 bytes, 41943040 sectors\nUnits: sectors of 1 * 512 = 512 bytes\nDevice     Boot   Start      End  Sectors Size Id Type\n/dev/sda1  *       2048  2099199  2097152   1G 83 Linux\n/dev/sda2       2099200 41943039 39843840  19G 8e Linux LVM"
+        }
+      ]
+    },
+    "/etc": {
+      title: "/etc",
+      subtitle: "System Configuration Files",
+      desc: "Housings for system-wide configuration files, startup scripts, and databases. Every application or subsystem has configuration files residing here. It does not store binaries; only plain text configurations. Important files include passwd, shadow, hosts, and fstab.",
+      commands: [
+        {
+          name: "Reading local host mappings",
+          explain: "Inspect DNS mappings stored locally.",
+          example: "cat /etc/hosts",
+          output: "127.0.0.1   localhost localhost.localdomain\n::1         localhost localhost.localdomain\n192.168.0.100 it.citynet.com it"
+        },
+        {
+          name: "Reviewing system user metadata",
+          explain: "Inspect the first 3 lines of the local user accounts databases.",
+          example: "head -n 3 /etc/passwd",
+          output: "root:x:0:0:root:/root:/bin/bash\nbin:x:1:1:bin:/bin:/sbin/nologin\ndaemon:x:2:2:daemon:/sbin:/sbin/nologin"
+        }
+      ]
+    },
+    "/dev": {
+      title: "/dev",
+      subtitle: "Device Files",
+      desc: "Contains virtual files that represent hardware devices or special virtual peripherals. Under Linux, hardware devices (hard drives, modems, sound cards) and special streams are treated as files. Example nodes are sda, null, random, and tty.",
+      commands: [
+        {
+          name: "Redirecting output to null device",
+          explain: "Silently discard standard command terminal outputs.",
+          example: "ping -c 2 8.8.8.8 > /dev/null",
+          output: "# Command completes successfully with no output shown"
+        },
+        {
+          name: "Generating cryptographic random bytes",
+          explain: "Extract 15 random characters from the random number generator stream.",
+          example: "head -c 15 /dev/urandom | base64",
+          output: "kJs7yRwP1z9L2XQ=="
+        }
+      ]
+    },
+    "/var": {
+      title: "/var",
+      subtitle: "Variable Data Files",
+      desc: "Contains files whose content is expected to dynamically grow or change during normal system operation. This includes logging logs (/var/log), mail spools, print queues, cached system packages, and lock databases.",
+      commands: [
+        {
+          name: "Reading system log messages",
+          explain: "Monitor the latest log messages printed by system services.",
+          example: "tail -n 3 /var/log/messages",
+          output: "Jun  3 20:30:11 it NetworkManager[834]: <info>  [1591194611] config: update hosts\nJun  3 20:35:02 it CROND[2344]: (root) CMD (/backup.sh)\nJun  3 20:41:15 it systemd[1]: Started System Security Services Daemon."
+        }
+      ]
+    },
+    "/tmp": {
+      title: "/tmp",
+      subtitle: "Temporary Files",
+      desc: "A world-writable storage for temporary files created by applications, services, or users. Data stored here is typically cleared out automatically on system reboot. Permissions are restricted by the 'sticky bit' (+t) so users can only delete their own files.",
+      commands: [
+        {
+          name: "Writing a transient file",
+          explain: "Standard users write temporary scripts or output logs inside /tmp.",
+          example: "echo 'debug logs' > /tmp/log.txt",
+          output: ""
+        },
+        {
+          name: "Checking directory security properties",
+          explain: "Confirm the 't' flag representing the Sticky Bit is active.",
+          example: "ls -ld /tmp",
+          output: "drwxrwxrwt. 12 root root 4096 Jun  3 20:55 /tmp"
+        }
+      ]
+    },
+    "/usr": {
+      title: "/usr",
+      subtitle: "User System Resources",
+      desc: "Housings for user-installed applications, software binaries, utility libraries, shared source code, and documents. /usr represents the secondary hierarchy of user utilities (e.g. /usr/bin, /usr/sbin, /usr/lib) that are not vital for basic boot recovery.",
+      commands: [
+        {
+          name: "Viewing sub-directories",
+          explain: "Examine the divisions of the user resources workspace.",
+          example: "ls -d /usr/*",
+          output: "/usr/bin  /usr/games  /usr/include  /usr/lib  /usr/lib64  /usr/local  /usr/sbin  /usr/share  /usr/src"
+        }
+      ]
+    },
+    "/opt": {
+      title: "/opt",
+      subtitle: "Optional Add-on Packages",
+      desc: "A directory reserved for third-party proprietary applications that are not part of the standard OS distribution (e.g. Google Chrome, VMware tools, custom database services, or Docker packages). Each package gets a dedicated directory.",
+      commands: [
+        {
+          name: "Listing installed optional software",
+          explain: "Find out what optional software suites have been installed.",
+          example: "ls -la /opt",
+          output: "total 8\ndrwxr-xr-x.  3 root root 4096 Jan 12  2025 .\ndr-xr-xr-x. 17 root root 4096 Jun  3 11:30 ..\ndrwxr-xr-x.  4 root root 4096 Mar 18  2025 containerd"
+        }
+      ]
+    },
+    "/boot": {
+      title: "/boot",
+      subtitle: "Static Boot Loader Files",
+      desc: "Contains the static files required to boot the Linux operating system. This contains the Linux Kernel images (vmlinuz), the initial RAM disk (initramfs), the configuration file mapping for GRUB, and grub environment details.",
+      commands: [
+        {
+          name: "Checking active kernel images",
+          explain: "Verify the exact version name of the kernel images compiled in boot.",
+          example: "ls -l /boot | grep vmlinuz",
+          output: "-rwxr-xr-x. 1 root root 8794824 Feb 22 21:05 vmlinuz-5.14.0-362.8.1.el9_3.x86_64"
+        }
+      ]
+    },
+    "/mnt": {
+      title: "/mnt",
+      subtitle: "Temporary Mount Points",
+      desc: "A location where administrators temporarily mount additional filesystems manually, such as secondary partitions, external drives, or remote NFS shared spaces, during troubleshooting or data migration.",
+      commands: [
+        {
+          name: "Mounting an external partition",
+          explain: "Mount partition /dev/sdb1 to /mnt.",
+          example: "sudo mount /dev/sdb1 /mnt && mount | grep mnt",
+          output: "/dev/sdb1 on /mnt type ext4 (rw,relatime)"
+        }
+      ]
+    },
+    "/media": {
+      title: "/media",
+      subtitle: "Removable Media Mount Points",
+      desc: "Reserved as a mount point for external removable storage devices that are auto-detected and auto-mounted by the operating system, such as CD-ROMs, floppy disks, or USB drives.",
+      commands: [
+        {
+          name: "Listing contents of auto-mounted flash drive",
+          explain: "Access the auto-mounted flash partition.",
+          example: "ls -l /media",
+          output: "total 4\ndrwxr-xr-x. 2 joy joy 4096 Jun  3 10:15 USB_FLASH"
+        }
+      ]
+    },
+    "/proc": {
+      title: "/proc",
+      subtitle: "Process & Kernel Information Virtual FS",
+      desc: "A virtual, memory-based filesystem created automatically by the kernel. It does not exist on disk and uses 0 bytes of storage. Files here act as windows into the kernel status, system parameters, memory statistics, and running processes.",
+      commands: [
+        {
+          name: "Reading CPU hardware model specs",
+          explain: "Ask the kernel directly for the CPU processor hardware details.",
+          example: "cat /proc/cpuinfo | grep 'model name' | uniq",
+          output: "model name\t: Intel(R) Core(TM) i7-10700K CPU @ 3.80GHz"
+        },
+        {
+          name: "Reading system memory consumption",
+          explain: "Inspect physical and swap memory allocations directly from the kernel stats.",
+          example: "cat /proc/meminfo | head -n 3",
+          output: "MemTotal:       16265732 kB\nMemFree:         4310540 kB\nMemAvailable:   11204980 kB"
+        }
+      ]
+    },
+    "/sys": {
+      title: "/sys",
+      subtitle: "System Virtual Filesystem",
+      desc: "A virtual memory-based filesystem introduced in Linux 2.6. Similar to /proc, it exposes kernel subsystems, device classes, physical hardware connections, and driver parameters directly to user space in a clean hierarchical layout.",
+      commands: [
+        {
+          name: "Inspecting top subsystems",
+          explain: "See the available device categories within the sys virtual directory.",
+          example: "ls /sys",
+          output: "block  bus  class  dev  devices  firmware  fs  hypervisor  kernel  module  power"
+        }
+      ]
+    }
+  };
+
+  const fshOverlay = document.getElementById("fshModalOverlay");
+  const fshTitle = document.getElementById("fshModalTitle");
+  const fshSubtitle = document.getElementById("fshModalSubtitle");
+  const fshDesc = document.getElementById("fshModalDesc");
+  const fshCommands = document.getElementById("fshModalCommands");
+  const fshCloseBtn = document.getElementById("fshModalCloseBtn");
+
+  function openFshModal(dirKey) {
+    const data = fshDetailsData[dirKey];
+    if (!data) return;
+
+    fshTitle.textContent = data.title;
+    fshSubtitle.textContent = data.subtitle;
+    fshDesc.textContent = data.desc;
+
+    let cmdsHTML = "";
+    if (data.commands && data.commands.length > 0) {
+      data.commands.forEach(cmd => {
+        cmdsHTML += `
+          <div class="fsh-command-item">
+            <div class="fsh-command-name">${cmd.name}</div>
+            <div class="fsh-command-explain">${cmd.explain}</div>
+            <div class="fsh-command-box">
+              <div class="fsh-cmd-line">${cmd.example}</div>
+              ${cmd.output ? `<div class="fsh-output-line">${cmd.output}</div>` : ""}
+            </div>
+          </div>
+        `;
+      });
+    } else {
+      cmdsHTML = `<div class="fsh-command-explain" style="text-align:center; padding: 20px 0;">No command examples available for this directory.</div>`;
+    }
+    fshCommands.innerHTML = cmdsHTML;
+
+    fshOverlay.classList.add("active");
+  }
+
+  function closeFshModal() {
+    fshOverlay.classList.remove("active");
+  }
+
+  // Bind click listeners to all tree-dirs
+  document.querySelectorAll(".tree-dir").forEach(el => {
+    el.addEventListener("click", () => {
+      const dirKey = el.getAttribute("data-fsh");
+      if (dirKey) openFshModal(dirKey);
+    });
+  });
+
+  if (fshCloseBtn) {
+    fshCloseBtn.addEventListener("click", closeFshModal);
+  }
+  if (fshOverlay) {
+    fshOverlay.addEventListener("click", (e) => {
+      if (e.target === fshOverlay) closeFshModal();
+    });
+  }
+
+  // Bind Escape key to close the modal
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && fshOverlay.classList.contains("active")) {
+      closeFshModal();
+    }
+  });
+
+  // --- Linux Command Details Database & Event Listeners ---
+  const linuxCmdDatabase = {
+    "pwd": {
+      desc: "Print Working Directory. Displays the absolute path of the directory you are currently working in.",
+      example: "pwd",
+      output: "/home/joy/projects"
+    },
+    "ls": {
+      desc: "List directory contents. Shows files and directories in the current folder.",
+      example: "ls",
+      output: "Desktop  Documents  Downloads  file.txt"
+    },
+    "ls -l": {
+      desc: "Long listing format. Shows detailed information about files: permissions, owner, size, and modification date.",
+      example: "ls -l",
+      output: "total 8\n-rw-r--r-- 1 joy joy  240 Jun  3 10:15 file.txt\ndrwxr-xr-x 2 joy joy 4096 Jun  3 12:30 projects"
+    },
+    "ls -la": {
+      desc: "List all contents, including hidden files (those starting with a dot, like .bashrc).",
+      example: "ls -la",
+      output: "total 16\ndrwxr-xr-x 4 joy joy 4096 Jun  3 21:00 .\ndr-xr-xr-x 17 root root 4096 Jun  3 11:30 ..\n-rw-r--r-- 1 joy joy  220 Dec 28  2023 .bashrc\n-rw-r--r-- 1 joy joy  240 Jun  3 10:15 file.txt"
+    },
+    "ls -lh": {
+      desc: "Human-readable format. Lists file sizes in KB, MB, or GB instead of bytes.",
+      example: "ls -lh",
+      output: "total 4.0K\n-rw-r--r-- 1 joy joy 240B Jun  3 10:15 file.txt\ndrwxr-xr-x 2 joy joy 4.0K Jun  3 12:30 projects"
+    },
+    "cd": {
+      desc: "Change Directory. Moves your current shell session into a different directory in the filesystem.",
+      example: "cd /var/log && pwd",
+      output: "/var/log"
+    },
+    "cd ..": {
+      desc: "Go one directory level up (the parent directory).",
+      example: "pwd && cd .. && pwd",
+      output: "/home/joy/projects\n/home/joy"
+    },
+    "cd ~": {
+      desc: "Go directly to the current user's home directory.",
+      example: "cd ~ && pwd",
+      output: "/home/joy"
+    },
+    "cd -": {
+      desc: "Go back to the previous directory you were working in.",
+      example: "cd -",
+      output: "/var/log"
+    },
+    "uname": {
+      desc: "Print system information (kernel name).",
+      example: "uname",
+      output: "Linux"
+    },
+    "uname -r": {
+      desc: "Print the kernel release version.",
+      example: "uname -r",
+      output: "5.14.0-362.8.1.el9_3.x86_64"
+    },
+    "uname -a": {
+      desc: "Print all system information including hardware architecture and kernel version.",
+      example: "uname -a",
+      output: "Linux it.citynet.com 5.14.0-362.8.1.el9_3.x86_64 #1 SMP Mon Oct 2 15:18:56 UTC 2023 x86_64 x86_64 GNU/Linux"
+    },
+    "whoami": {
+      desc: "Print the username of the current active session.",
+      example: "whoami",
+      output: "joy"
+    },
+    "id": {
+      desc: "Print real and effective user (UID) and group (GID) information.",
+      example: "id",
+      output: "uid=1001(joy) gid=1001(joy) groups=1001(joy),27(sudo),121(docker)"
+    },
+    "hostname": {
+      desc: "Show or set the system's host name.",
+      example: "hostname",
+      output: "it.citynet.com"
+    },
+    "date": {
+      desc: "Show or set the system date and time.",
+      example: "date",
+      output: "Wed Jun  3 21:07:12 +06 2026"
+    },
+    "uptime": {
+      desc: "Show how long the system has been running, active users, and load average.",
+      example: "uptime",
+      output: "21:07:12 up  2:14,  1 user,  load average: 0.15, 0.08, 0.02"
+    },
+    "history": {
+      desc: "Display the command history list with line numbers.",
+      example: "history | tail -n 5",
+      output: "  502  mkdir projects\n  503  cd projects\n  504  git init\n  505  touch readme.md\n  506  history | tail -n 5"
+    },
+    "clear": {
+      desc: "Clears the terminal screen for a clean workspace.",
+      example: "clear",
+      output: "# Screen cleared"
+    },
+    "cat": {
+      desc: "Concatenate and display file content.",
+      example: "cat file.txt",
+      output: "Hello World\nThis is a short note for DevOps engineers."
+    },
+    "cat -n": {
+      desc: "Display file content prefixed with line numbers.",
+      example: "cat -n file.txt",
+      output: "     1  Hello World\n     2  This is a short note for DevOps engineers."
+    },
+    "less": {
+      desc: "Interactive pager. Allows backward and forward scrolling through a file.",
+      example: "less /etc/passwd",
+      output: "root:x:0:0:root:/root:/bin/bash\n...\n(press q to quit)"
+    },
+    "more": {
+      desc: "Standard pager. Allows forward scrolling screen-by-screen.",
+      example: "more /etc/passwd",
+      output: "root:x:0:0:root:/root:/bin/bash\n--More--(24%)"
+    },
+    "tac": {
+      desc: "Concatenate and display files in reverse order (bottom line first).",
+      example: "tac file.txt",
+      output: "This is a short note for DevOps engineers.\nHello World"
+    },
+    "nl": {
+      desc: "Number lines of files.",
+      example: "nl file.txt",
+      output: "     1  Hello World\n     2  This is a short note for DevOps engineers."
+    },
+    "df -h": {
+      desc: "Show disk space usage of all mounted filesystems in human-readable sizes.",
+      example: "df -h",
+      output: "Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda1        19G  5.2G   13G  30% /\ntmpfs           7.8G     0  7.8G   0% /dev/shm"
+    },
+    "du -sh": {
+      desc: "Show summary disk usage of a directory in human-readable format.",
+      example: "du -sh /var/log",
+      output: "412M\t/var/log"
+    },
+    "free -h": {
+      desc: "Display system memory (RAM) usage in human-readable format.",
+      example: "free -h",
+      output: "               total        used        free      shared  buff/cache   available\nMem:            15Gi       3.2Gi       5.4Gi       210Mi       6.4Gi        11Gi\nSwap:          2.0Gi          0B       2.0Gi"
+    },
+    "top": {
+      desc: "Display live Linux processes and CPU/memory utilization.",
+      example: "top",
+      output: "top - 21:07:12 up 2:14, 1 user, load average: 0.15\nTasks: 210 total,   1 running, 209 sleeping\n%Cpu(s):  2.3 us,  1.1 sy,  0.0 ni, 96.6 id"
+    },
+    "htop": {
+      desc: "Interactive, colored process viewer. Modern replacement for top.",
+      example: "htop",
+      output: "# Colored, user-friendly interactive terminal process layout"
+    },
+    "ps aux": {
+      desc: "Report snapshot of current running processes.",
+      example: "ps aux | head -n 3",
+      output: "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND\nroot         1  0.0  0.0 167904 11232 ?        Ss   18:53   0:02 /sbin/init\nroot         2  0.0  0.0      0     0 ?        S    18:53   0:00 [kthreadd]"
+    },
+    "kill": {
+      desc: "Send termination signal (default SIGTERM) to a process by its PID.",
+      example: "kill 1234",
+      output: ""
+    },
+    "kill -9": {
+      desc: "Forcefully kill a process using SIGKILL signal.",
+      example: "kill -9 1234",
+      output: ""
+    },
+    "mkdir": {
+      desc: "Create new directories.",
+      example: "mkdir new_project",
+      output: ""
+    },
+    "mkdir -p": {
+      desc: "Create parent directories as needed (nested directories).",
+      example: "mkdir -p /tmp/dev/qa/test",
+      output: ""
+    },
+    "touch": {
+      desc: "Create an empty file or update timestamps of an existing file.",
+      example: "touch script.sh",
+      output: ""
+    },
+    "cp": {
+      desc: "Copy files or directories.",
+      example: "cp file.txt backup.txt",
+      output: ""
+    },
+    "cp -r": {
+      desc: "Copy directories recursively.",
+      example: "cp -r /src/folder /dest/folder",
+      output: ""
+    },
+    "mv": {
+      desc: "Move (rename) files or directories.",
+      example: "mv old_name.txt new_name.txt",
+      output: ""
+    },
+    "rm": {
+      desc: "Remove files or directories.",
+      example: "rm file.txt",
+      output: ""
+    },
+    "rm -rf": {
+      desc: "Force recursive deletion of directories and contents.",
+      example: "rm -rf /tmp/test_dir",
+      output: ""
+    },
+    "useradd": {
+      desc: "Create a new user account.",
+      example: "sudo useradd -m devops",
+      output: ""
+    },
+    "passwd": {
+      desc: "Change password for a user account.",
+      example: "sudo passwd devops",
+      output: "Changing password for user devops.\nNew password: \nRetype new password: \npasswd: all authentication tokens updated successfully."
+    },
+    "usermod": {
+      desc: "Modify a user account settings.",
+      example: "sudo usermod -aG docker joy",
+      output: ""
+    },
+    "userdel": {
+      desc: "Delete a user account.",
+      example: "sudo userdel -r olduser",
+      output: ""
+    },
+    "groupadd": {
+      desc: "Create a new user group.",
+      example: "sudo groupadd devops_group",
+      output: ""
+    },
+    "groupdel": {
+      desc: "Delete a user group.",
+      example: "sudo groupdel devops_group",
+      output: ""
+    },
+    "gpasswd": {
+      desc: "Administer /etc/group and /etc/gshadow files (add/remove users).",
+      example: "sudo gpasswd -a joy devops",
+      output: "Adding user joy to group devops"
+    },
+    "groups": {
+      desc: "Print the groups a user belongs to.",
+      example: "groups joy",
+      output: "joy : joy sudo docker"
+    },
+    "chmod": {
+      desc: "Change file mode bits (permissions).",
+      example: "chmod +x script.sh",
+      output: ""
+    },
+    "chown": {
+      desc: "Change file owner and group ownerships.",
+      example: "sudo chown -R joy:joy /var/www",
+      output: ""
+    },
+    "chgrp": {
+      desc: "Change group ownership of files.",
+      example: "sudo chgrp devops file.txt",
+      output: ""
+    },
+    "getfacl": {
+      desc: "Get file Access Control Lists (detailed permissions).",
+      example: "getfacl file.txt",
+      output: "# file: file.txt\n# owner: joy\n# group: joy\nuser::rw-\nuser:shub:rwx\ngroup::r--\nmask::rwx\nother::r--"
+    },
+    "setfacl": {
+      desc: "Set file Access Control Lists.",
+      example: "setfacl -m u:shub:rwx file.txt",
+      output: ""
+    },
+    "grep": {
+      desc: "Search text patterns using regular expressions.",
+      example: "grep 'error' /var/log/syslog",
+      output: "Jun  3 12:04:10 it systemd: Failed to start NTP service."
+    },
+    "find": {
+      desc: "Search for files in a directory hierarchy.",
+      example: "find /home -name '*.txt'",
+      output: "/home/joy/file.txt\n/home/joy/projects/notes.txt"
+    },
+    "head": {
+      desc: "Output the first part (default 10 lines) of files.",
+      example: "head -n 3 file.txt",
+      output: "Line 1\nLine 2\nLine 3"
+    },
+    "tail": {
+      desc: "Output the last part (default 10 lines) of files.",
+      example: "tail -n 3 file.txt",
+      output: "Line 8\nLine 9\nLine 10"
+    },
+    "wc": {
+      desc: "Print newline, word, and byte counts for files.",
+      example: "wc file.txt",
+      output: " 10  45 240 file.txt"
+    },
+    "sort": {
+      desc: "Sort lines of text files.",
+      example: "sort fruits.txt",
+      output: "apple\nbanana\ncherry"
+    },
+    "cut": {
+      desc: "Remove sections (columns) from each line of files.",
+      example: "cut -d: -f1 /etc/passwd | head -n 3",
+      output: "root\nbin\ndaemon"
+    },
+    "awk": {
+      desc: "Pattern scanning and processing language.",
+      example: "awk -F: '{print $1}' /etc/passwd | head -n 3",
+      output: "root\nbin\ndaemon"
+    },
+    "sed": {
+      desc: "Stream editor for filtering and transforming text.",
+      example: "sed 's/apple/orange/g' basket.txt",
+      output: "orange\nbanana\ncherry"
+    },
+    "uniq": {
+      desc: "Report or omit repeated lines.",
+      example: "uniq duplicate.txt",
+      output: "apple\nbanana"
+    },
+    "tar": {
+      desc: "Archiving utility to store multiple files in a single archive.",
+      example: "tar -cvf backup.tar /var/log",
+      output: "tar: Removing leading '/' from member names\nvar/log/\nvar/log/syslog\nvar/log/messages"
+    },
+    "crontab": {
+      desc: "Schedule recurring tasks (cron jobs) for a user.",
+      example: "crontab -l",
+      output: "0 2 * * * /backup.sh"
+    },
+    "systemctl": {
+      desc: "Control the systemd system and service manager.",
+      example: "systemctl status sshd",
+      output: "● sshd.service - OpenSSH server daemon\n   Active: active (running) since Wed 2026-06-03 18:53:02 UTC"
+    },
+    "at": {
+      desc: "Queue commands for one-time execution at a specified time.",
+      example: "echo 'shutdown -h now' | at midnight",
+      output: "warning: commands will be executed using /bin/sh\njob 3 at Thu Jun  4 00:00:00 2026"
+    },
+    "sudo": {
+      desc: "Execute a command as the superuser (root) or another user.",
+      example: "sudo whoami",
+      output: "root"
+    },
+    "ip": {
+      desc: "Show / manipulate routing, network devices, interfaces, and tunnels.",
+      example: "ip addr show eth0",
+      output: "2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP\n    inet 10.0.2.15/24 brd 10.0.2.255 scope global eth0"
+    },
+    "ping": {
+      desc: "Send ICMP ECHO_REQUEST packets to network hosts to check connectivity.",
+      example: "ping -c 2 google.com",
+      output: "PING google.com (142.250.190.46) 56(84) bytes of data.\n64 bytes from 142.250.190.46: icmp_seq=1 ttl=118 time=12.4 ms\n64 bytes from 142.250.190.46: icmp_seq=2 ttl=118 time=12.2 ms\n\n--- google.com ping statistics ---\n2 packets transmitted, 2 received, 0% packet loss, time 1002ms"
+    },
+    "traceroute": {
+      desc: "Print the route packets trace to a network host.",
+      example: "traceroute -m 3 google.com",
+      output: "traceroute to google.com (142.250.190.46), 30 hops max, 60 byte packets\n 1  192.168.0.1 (192.168.0.1)  1.235 ms  1.102 ms  0.985 ms\n 2  10.0.0.1 (10.0.0.1)  4.312 ms  4.110 ms  3.985 ms\n 3  142.250.190.46 (142.250.190.46)  12.412 ms  12.302 ms  12.185 ms"
+    },
+    "nslookup": {
+      desc: "Query Internet name servers interactively (DNS lookup).",
+      example: "nslookup google.com",
+      output: "Server:\t\t127.0.0.53\nAddress:\t127.0.0.53#53\n\nNon-authoritative answer:\nName:\tgoogle.com\nAddress: 142.250.190.46"
+    },
+    "dig": {
+      desc: "Domain Information Groper. Flexible tool for querying DNS name servers.",
+      example: "dig +short google.com",
+      output: "142.250.190.46"
+    },
+    "ss": {
+      desc: "Investigate sockets (TCP/UDP ports). Modern replacement for netstat.",
+      example: "ss -tuln",
+      output: "Netid State  Recv-Q Send-Q Local Address:Port Peer Address:Port\ntcp   LISTEN 0      128          0.0.0.0:22        0.0.0.0:*\ntcp   LISTEN 0      80           0.0.0.0:80        0.0.0.0:*"
+    },
+    "netstat": {
+      desc: "Print network connections, routing tables, and interface statistics.",
+      example: "netstat -tuln",
+      output: "Active Internet connections (only servers)\nProto Recv-Q Send-Q Local Address           Foreign Address         State\ntcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN"
+    },
+    "firewall-cmd": {
+      desc: "Command line client of firewalld daemon.",
+      example: "sudo firewall-cmd --list-ports",
+      output: "80/tcp 443/tcp"
+    },
+    "nmcli": {
+      desc: "Command-line tool for controlling NetworkManager.",
+      example: "nmcli device status",
+      output: "DEVICE  TYPE      STATE      CONNECTION\nens33   ethernet  connected  ens33\nlo      loopback  unmanaged  --"
+    }
+  };
+
+  function getCommandDetails(dataCmd) {
+    const cleanCmd = dataCmd.trim();
+    
+    // 1. Check direct match (e.g. "ls -la" or "df -h")
+    if (linuxCmdDatabase[cleanCmd]) {
+      return {
+        name: cleanCmd,
+        ...linuxCmdDatabase[cleanCmd]
+      };
+    }
+    
+    // 2. Parse base command
+    const tokens = cleanCmd.split(/\s+/);
+    let baseCmd = tokens[0];
+    
+    if (baseCmd === "sudo" && tokens.length > 1) {
+      baseCmd = tokens[1];
+    }
+    
+    // Check if base command is in database
+    if (linuxCmdDatabase[baseCmd]) {
+      return {
+        name: baseCmd,
+        ...linuxCmdDatabase[baseCmd],
+        // Override example with the clicked command for context!
+        example: cleanCmd 
+      };
+    }
+    
+    // 3. Fallback generic details if command not found
+    return {
+      name: baseCmd,
+      desc: `Linux command execution helper. Part of standard DevOps administration toolkit.`,
+      example: cleanCmd,
+      output: `# Executing command...\n# Exit code: 0`
+    };
+  }
+
+  function openCmdDetailsModal(dataCmd) {
+    const details = getCommandDetails(dataCmd);
+    
+    fshTitle.textContent = details.name;
+    fshSubtitle.textContent = "Linux Command Reference";
+    fshDesc.textContent = details.desc;
+    
+    fshCommands.innerHTML = `
+      <div class="fsh-command-item">
+        <div class="fsh-command-name">Typical Execution Example</div>
+        <div class="fsh-command-explain">Executing command and displaying mock terminal console output:</div>
+        <div class="fsh-command-box">
+          <div class="fsh-cmd-line">${details.example}</div>
+          ${details.output ? `<div class="fsh-output-line">${details.output}</div>` : ""}
+        </div>
+      </div>
+    `;
+    
+    fshOverlay.classList.add("active");
+  }
+
+  // Bind click handlers to code lines for detailed lookups
+  document.querySelectorAll(".code-line").forEach(line => {
+    line.addEventListener("click", (e) => {
+      // Avoid triggering when user clicks on copy buttons
+      if (e.target.closest(".copy-line-btn")) return;
+      
+      const cmd = line.getAttribute("data-cmd");
+      if (cmd) {
+        openCmdDetailsModal(cmd);
+      }
+    });
+  });
+
 });
 </script>
 </main>
 </body>
 </html>
-
